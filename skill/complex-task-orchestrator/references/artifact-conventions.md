@@ -6,11 +6,36 @@
 
 如果用户没有要求其他结构，就在项目里创建 `docs/` 目录来存放关键流程产物。
 
+如果是单个项目里的多个复杂任务，优先按任务分目录，而不是把所有任务文档堆在同一级目录。
+
+推荐结构：
+
+```text
+docs/
+  task-slug/
+    01-requirement-consensus.md
+    02-task-execution-prompt.md
+    03-self-review-and-summary.md
+    [primary-output-if-needed]
+```
+
 默认文件：
 
 - `01-requirement-consensus.md`
 - `02-task-execution-prompt.md`
 - `03-self-review-and-summary.md`
+
+## 任务目录命名
+
+- 默认使用短英文 slug，便于长期维护
+- 命名应描述任务本身，而不是阶段
+- 避免使用过于泛的名字如 `task1`、`research`、`new-task`
+
+示例：
+
+- `sexual-behavior-evidence-review`
+- `skill-release-plan`
+- `plugin-comparison-study`
 
 ## 语言规则
 
@@ -59,6 +84,7 @@
 
 - 可复用规则放在 Skill 目录
 - 本次任务的决策和结果放在 `docs/`
+- 如果同一项目中连续执行多个复杂任务，每个任务各自维护自己的子目录
 
 ## 压缩规则
 

@@ -12,6 +12,20 @@ description: >
 - 为当前任务生成一次性执行指令文档，而不是复用空泛的通用 prompt。
 - 把任务推进到可交付结果、自检和总结，而不是停在想法或方案层。
 
+## Stage Broadcast
+
+- 在每个关键阶段切换时，明确告诉用户当前处于哪一阶段。
+- 默认阶段名称：
+  - 需求澄清
+  - 共识确认
+  - 执行指令生成
+  - 正式执行
+  - 自检修订
+  - 任务总结
+  - 扩展验证（仅在需要 forward test 时进入）
+- 如果任务在主流程内已经完成，要明确说“主任务已完成”；不要把后续可选验证说成主流程尚未完成。
+- 按 [references/stage-broadcast.md](references/stage-broadcast.md) 输出阶段提示。
+
 ## Default Workflow
 
 ### 1. Adopt the strongest-brain stance
@@ -32,6 +46,7 @@ description: >
 - 如果用户明确要求直接做，且任务已经足够清晰、没有关键歧义，可以压缩澄清轮次。
 - 如果仍存在可能改变方案方向、范围或验收标准的歧义，继续澄清，不要为了节省轮次而跳过。
 - 如果任务复杂度高、开放性强、误解成本高，或者用户明确要求严格协议，读取 [references/full-protocol.md](references/full-protocol.md) 并按其高强度模式执行。
+- 当你不确定该用轻量模式还是完整模式时，按 [references/mode-selection.md](references/mode-selection.md) 做判断，而不是凭感觉切换。
 
 ### 4. Confirm consensus explicitly
 
@@ -49,6 +64,7 @@ description: >
   - 自检与总结文档
 - 按 [references/artifact-conventions.md](references/artifact-conventions.md) 组织文档。
 - 按 [references/execution-prompt-template.md](references/execution-prompt-template.md) 生成任务执行指令，默认完整，再按复杂度裁剪。
+- 如果任务本质上是研究、调查、证据整合、文献综述或框架比较，读取 [references/research-review-workflow.md](references/research-review-workflow.md)。
 
 ### 6. Execute against the agreed prompt
 
@@ -64,6 +80,7 @@ description: >
 - 先给工作打 1 到 10 分，并说明扣分原因。
 - 如果低于 9.5，继续修订，直到达到 9.5 以上，或被外部缺失信息阻塞；如果被阻塞，明确说明阻塞点。
 - 最后输出问题、本质原因、解决方案和完成度信心。
+- 用 [references/definition-of-done.md](references/definition-of-done.md) 区分“主任务闭环完成”和“额外验证仍待进行”。
 
 ## Conversation Rules
 
@@ -86,6 +103,10 @@ description: >
 ## References
 
 - 需要文档产物规则时，读取 [references/artifact-conventions.md](references/artifact-conventions.md)。
+- 需要阶段播报时，读取 [references/stage-broadcast.md](references/stage-broadcast.md)。
+- 需要判断轻量模式或完整模式时，读取 [references/mode-selection.md](references/mode-selection.md)。
 - 需要生成一次性任务执行指令时，读取 [references/execution-prompt-template.md](references/execution-prompt-template.md)。
+- 需要处理研究、调研、综述、证据整合任务时，读取 [references/research-review-workflow.md](references/research-review-workflow.md)。
 - 需要执行后自检时，读取 [references/self-review-checklist.md](references/self-review-checklist.md)。
+- 需要判断任务是否真正完成、以及 forward test 是否属于主流程时，读取 [references/definition-of-done.md](references/definition-of-done.md)。
 - 需要高强度完整协议时，读取 [references/full-protocol.md](references/full-protocol.md)。

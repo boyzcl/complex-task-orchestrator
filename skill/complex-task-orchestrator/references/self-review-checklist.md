@@ -8,6 +8,7 @@ Use this reference after executing the task.
 2. Explain every deduction.
 3. Revise the work if the score is below 9.5.
 4. Repeat until the score is above 9.5, or state the concrete external blocker that prevents further improvement.
+5. State clearly whether the main task is complete or whether the remaining work is only forward testing / extended validation.
 
 ## Review Questions
 
@@ -26,3 +27,4 @@ Always end with:
 - what the root cause was
 - what solution was implemented
 - what confidence percentage you assign to the current solution
+- whether the main task is complete and whether any remaining work is optional extended validation
