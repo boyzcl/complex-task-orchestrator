@@ -1,54 +1,53 @@
 # complex-task-orchestrator
 
-`complex-task-orchestrator` is a reusable skill for complex, open-ended, multi-step tasks.
+一个面向复杂任务的可复用 Skill。
 
-It helps an agent avoid the classic failure mode of agentic work:
+它解决的不是模型会不会做，而是复杂任务里最常见的那个问题：
 
-- rushing into execution before the requirement is actually clear
-- producing a polished answer to the wrong problem
-- finishing a task without a real self-review loop
+- 需求还没讲清楚，模型就开始执行
+- 模型产出看起来很完整，但其实做错了题
+- 任务做完就停，没有真正的自检和修订闭环
 
-Instead, this skill pushes the workflow through:
+`complex-task-orchestrator` 的目标，就是把复杂任务拉回一条更稳的路径：
 
-1. requirement clarification
-2. explicit consensus confirmation
-3. task-specific execution prompt generation
-4. execution
-5. self-review and revision
-6. final summary
+1. 先澄清需求
+2. 再达成共识
+3. 再生成一次性执行指令
+4. 再正式执行
+5. 最后自检、修订、总结
 
-## What It Is Good For
+[English README](./README_EN.md)
 
-Use it when the task is complex, ambiguous, multi-stage, or costly to misunderstand.
+## 适合什么任务
 
-Examples:
+适合复杂、开放、多阶段、误解成本高的任务，例如：
 
-- research and evidence reviews
-- workflow and system design
-- large prompt / skill / plugin creation
-- project planning
-- open-ended implementation tasks
-- any task where you want the model to clarify first instead of charging ahead
+- 调研、综述、证据整合
+- 工作流设计、系统设计
+- Skill / Prompt / Plugin 创建
+- 项目规划
+- 大型或开放式实现任务
+- 任何你希望模型先问清楚、再开始做的任务
 
-## What It Is Not For
+## 不适合什么任务
 
-Do not use it for small, obvious, low-risk tasks like:
+不建议用于非常简单、范围明确、低风险的任务，例如：
 
-- quick bug fixes
-- short rewrites
-- trivial formatting requests
-- simple factual lookups
+- 小 bug 修复
+- 短文本润色
+- 简单格式调整
+- 单步事实查询
 
-## Core Ideas
+## 核心能力
 
-- clarify one question at a time when needed
-- confirm understanding before execution
-- generate a task-specific Markdown execution document
-- keep user-facing project docs readable in the user's working language
-- distinguish the main task flow from optional forward testing
-- self-score and revise before calling the work done
+- 在需要时，一次只问一个真正推进理解的问题
+- 在执行前明确复述需求并等待确认
+- 为当前任务生成一次性的 Markdown 执行指令文档
+- 让用户侧项目文档默认跟随当前工作语言
+- 明确区分主任务闭环和可选的 forward test
+- 在结束前进行自评和修订，而不是直接收工
 
-## Repository Structure
+## 仓库结构
 
 ```text
 skill/complex-task-orchestrator/
@@ -59,73 +58,72 @@ scripts/
   install-claude-code-skill.sh
 docs/
   claude-code-compatibility.md
-  introducing-complex-task-orchestrator.md
-  ...
 .claude/skills/complex-task-orchestrator
 ```
 
-- `skill/complex-task-orchestrator/` is the actual installable skill
-- `scripts/` contains helper install scripts
-- `docs/` contains compatibility notes, examples, and development artifacts
-- `.claude/skills/complex-task-orchestrator` makes the repo Claude Code-friendly at the project level
+- `skill/complex-task-orchestrator/` 是真正可安装的 Skill 本体
+- `scripts/` 是安装辅助脚本
+- `docs/` 只保留对公开使用有帮助的文档
+- `.claude/skills/complex-task-orchestrator` 让这个仓库对 Claude Code 更友好
 
-## Install In Codex
+## 安装到 Codex
 
 ```bash
 bash /path/to/complex-task-orchestrator/scripts/install-codex-skill.sh
 ```
 
-This installs a symlink to:
+会安装到：
 
 ```text
 ~/.codex/skills/complex-task-orchestrator
 ```
 
-## Install In Claude Code
+## 安装到 Claude Code
 
 ```bash
 bash /path/to/complex-task-orchestrator/scripts/install-claude-code-skill.sh
 ```
 
-This installs a symlink to:
+会安装到：
 
 ```text
 ~/.claude/skills/complex-task-orchestrator
 ```
 
-The repository also includes a project-level Claude Code skill entry under:
+项目内也已经包含了一个项目级入口：
 
 ```text
 .claude/skills/complex-task-orchestrator
 ```
 
-More details: [docs/claude-code-compatibility.md](docs/claude-code-compatibility.md)
+兼容说明见：
+[docs/claude-code-compatibility.md](docs/claude-code-compatibility.md)
 
-## Example Usage
+## 使用示例
 
-Examples of requests that should trigger this skill:
+下面这些请求，通常就适合触发这个 Skill：
 
 - `Use complex-task-orchestrator to help me plan and execute this ambiguous project.`
-- `This is a complex task. Ask me one question at a time until you understand what I actually want.`
-- `Help me create a task-specific execution prompt before doing the work.`
-- `I want a clarify -> confirm -> execute -> self-review workflow for this task.`
+- `这是一个复杂任务，请先一次问我一个问题，直到你真正理解需求。`
+- `先帮我生成当前任务的执行指令文档，再开始做。`
+- `我想要一套 clarify -> confirm -> execute -> self-review 的完整流程。`
 
-## Current Status
+## 当前状态
 
-This repository is publishable and usable now, but it is still evolving through real tasks.
+这个仓库现在已经可用、可安装、可公开发布，但还会继续通过真实任务迭代。
 
-Recent improvements include:
+最近补齐的能力包括：
 
-- explicit stage broadcasting
-- lightweight vs full-protocol mode selection
-- research / review workflow guidance
-- task folder naming conventions
-- definition of done vs optional forward testing
+- 阶段播报
+- 轻量模式 vs 完整模式判断
+- 研究 / 综述类任务 workflow
+- 任务目录命名规范
+- 主任务完成 vs 扩展验证的边界定义
 
-## Compatibility
+## 兼容性
 
-- Codex: compatible
-- Claude Code: structure-compatible, with install helper and project-level skill entry
+- Codex：兼容
+- Claude Code：结构兼容，并已提供安装脚本和项目级入口
 
 ## License
 
