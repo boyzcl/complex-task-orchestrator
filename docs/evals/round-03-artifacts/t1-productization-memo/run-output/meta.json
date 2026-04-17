@@ -1,0 +1,8 @@
+{
+  "root_dir": "/Users/boyzcl/Documents/Complex_Task",
+  "prompt_file": "/Users/boyzcl/Documents/Complex_Task/docs/evals/round-03-artifacts/t1-productization-memo/prompt.md",
+  "timeout_seconds": 180,
+  "model": "default",
+  "sandbox": "workspace-write",
+  "isolated_codex_home": "/var/folders/lb/58dlt97j5hs41tbwllv5kk180000gn/T/tmp.ml6cJREcTa/.codex"
+}

@@ -1,54 +1,174 @@
 # complex-task-orchestrator
 
-A reusable skill for complex, open-ended, multi-step tasks.
-
-It helps an agent avoid the classic failure mode of agentic work:
-
-- rushing into execution before the requirement is actually clear
-- producing a polished answer to the wrong problem
-- finishing a task without a real self-review loop
-
-Instead, this skill pushes the workflow through:
-
-1. requirement clarification
-2. explicit consensus confirmation
-3. task-specific execution prompt generation
-4. execution
-5. self-review and revision
-6. final summary
+A reusable skill that pushes complex tasks through clarify, align, execute, and self-review instead of letting the model charge ahead too early.
 
 [中文说明](./README.md)
 
-## What It Is Good For
+## Current Stage
 
-Use it when the task is complex, ambiguous, multi-stage, or costly to misunderstand.
+As of April 17, 2026, the most accurate project position is:
 
-Examples:
+- validated in `Codex`
+- currently entering a `Codex`-only limited-trial stage
+- strongest validated task types are short briefs, quick reviews / audits, and fixed-source judgment memos
 
-- research and evidence reviews
-- workflow and system design
-- large prompt / skill / plugin creation
-- project planning
-- open-ended implementation tasks
-- any task where you want the model to clarify first instead of charging ahead
+It should not currently be described as:
 
-## What It Is Not For
+- stable across clients
+- a general complex-task agent
+- the default better path for all complex tasks
 
-Do not use it for small, obvious, low-risk tasks like:
+## When To Use
 
-- quick bug fixes
+- complex, ambiguous, multi-stage tasks
+- work where misunderstanding is expensive
+- tasks that benefit from explicit consensus before execution
+- research reviews, system design, project planning, open-ended implementation, skill and workflow design
+
+## Strongest Validated Uses Right Now
+
+- short status syncs / briefs
+- quick reviews / audits
+- fixed-source complex judgment memos
+
+These are not the full theoretical scope of the skill. They are the task types that have repeated positive evidence in `Codex` as of April 17, 2026.
+
+## When Not To Use
+
+- tiny bug fixes
 - short rewrites
-- trivial formatting requests
-- simple factual lookups
+- trivial formatting
+- single-step factual lookups
+- low-risk requests where the process would cost more than the task
 
-## Core Ideas
+## 30-Second Example
 
-- clarify one question at a time when needed
-- confirm understanding before execution
-- generate a task-specific Markdown execution document
-- keep user-facing project docs readable in the user's working language
-- distinguish the main task flow from optional forward testing
-- self-score and revise before calling the work done
+```text
+This is a complex task. Use complex-task-orchestrator to clarify the requirement, confirm consensus, create an execution prompt, and then do the work.
+```
+
+```text
+Use complex-task-orchestrator to clarify this ambiguous task before execution.
+```
+
+## What Happens On First Run
+
+On a typical first run, the skill will try to move the task through a more reliable path:
+
+1. clarify the most important ambiguity
+2. restate the requirement and ask for confirmation
+3. generate a task-specific execution document
+4. execute
+5. self-review, revise, and summarize
+
+If the task is already clear enough, it can switch to the `Quick Path`:
+
+- 0 to 1 clarification turns
+- one short consensus confirmation
+- a short execution prompt
+- self-review still required
+
+## What A Run Usually Produces
+
+If writing artifacts is allowed, the default minimal outputs are:
+
+- `01-requirement-consensus.md`
+- `02-task-execution-prompt.md`
+- `03-self-review-and-summary.md`
+
+See [docs/first-run-example.md](docs/first-run-example.md) and [artifact conventions](skill/complex-task-orchestrator/references/artifact-conventions.md).
+
+## Why It Is More Reliable Than Direct Prompting
+
+Direct prompting often fails in three ways:
+
+- execution starts before the requirement is actually clear
+- the answer looks polished but solves the wrong problem
+- the task ends without a real revision loop
+
+This skill is useful because it makes the execution contract explicit before the model commits to a path.
+
+More detail: [docs/why-this-helps.md](docs/why-this-helps.md)
+
+## Install
+
+### Codex
+
+```bash
+bash /path/to/complex-task-orchestrator/scripts/install-codex-skill.sh
+```
+
+This creates:
+
+```text
+~/.codex/skills/complex-task-orchestrator
+```
+
+This is the primary path that has completed real-task validation and now supports the limited-trial position.
+
+### Claude Code
+
+```bash
+bash /path/to/complex-task-orchestrator/scripts/install-claude-code-skill.sh
+```
+
+This creates:
+
+```text
+~/.claude/skills/complex-task-orchestrator
+```
+
+This only establishes installation and structure visibility. It does not mean Claude Code is part of the current validated scope. See [docs/claude-code-compatibility.md](docs/claude-code-compatibility.md).
+
+## Public Examples
+
+- [Examples index](docs/cases/README.md)
+- [Case 1: research review](docs/cases/case-01-research-review.md)
+- [Case 2: skill bootstrap](docs/cases/case-02-skill-bootstrap.md)
+- [Case 3: project remediation](docs/cases/case-03-project-remediation.md)
+- [before / after comparison](docs/cases/before-after-comparison.md)
+
+These are curated public assets, not raw runtime exports. See [docs/runtime-asset-boundary.md](docs/runtime-asset-boundary.md).
+
+## Runtime Memory
+
+This repository now includes a minimal runtime memory layer:
+
+- `runtime/captures/`
+- `runtime/promoted/patterns/`
+- `runtime/promoted/failure-modes/`
+- `runtime/state/runtime-memory-manifest.json`
+
+Specification: [docs/runtime-memory-spec.md](docs/runtime-memory-spec.md)
+Governance: [docs/runtime-governance.md](docs/runtime-governance.md)
+
+## Current Status
+
+As of April 17, 2026, this project includes:
+
+- an installable skill
+- Codex and Claude Code install scripts
+- quick path and full path behavior
+- a minimal runtime memory host
+- a packaged `v0.2.0` release set
+- 3 public cases and 1 comparison page
+- changelog, smoke checklist, and validation matrix
+- a Round 2 client-validation framework
+- a Round 3 real-task evidence chain
+- lightweight memory governance rules
+
+Current validated scope:
+
+- phase-level validation in `Codex`
+- a `Codex`-only limited-trial position
+- briefs, quick audits, and fixed-source judgment tasks
+
+It does not claim:
+
+- a mature automated memory system
+- complete behavior validation across all clients
+- broad stability as a general complex-task agent
+- that `.local-docs/` is the public evidence layer
 
 ## Repository Structure
 
@@ -56,71 +176,24 @@ Do not use it for small, obvious, low-risk tasks like:
 skill/complex-task-orchestrator/
   SKILL.md
   references/
+  runtime/
 scripts/
   install-codex-skill.sh
   install-claude-code-skill.sh
+  validate-skill-project.sh
 docs/
-  claude-code-compatibility.md
+  cases/
+  templates/
+  *.md
 .claude/skills/complex-task-orchestrator
 ```
 
-- `skill/complex-task-orchestrator/` is the actual installable skill
-- `scripts/` contains helper install scripts
-- `docs/` contains public-facing support docs
-- `.claude/skills/complex-task-orchestrator` makes the repo Claude Code-friendly at the project level
+## Maintenance Signals
 
-## Install In Codex
-
-```bash
-bash /path/to/complex-task-orchestrator/scripts/install-codex-skill.sh
-```
-
-This installs a symlink to:
-
-```text
-~/.codex/skills/complex-task-orchestrator
-```
-
-## Install In Claude Code
-
-```bash
-bash /path/to/complex-task-orchestrator/scripts/install-claude-code-skill.sh
-```
-
-This installs a symlink to:
-
-```text
-~/.claude/skills/complex-task-orchestrator
-```
-
-More details:
-[docs/claude-code-compatibility.md](docs/claude-code-compatibility.md)
-
-## Example Usage
-
-Examples of requests that should trigger this skill:
-
-- `Use complex-task-orchestrator to help me plan and execute this ambiguous project.`
-- `This is a complex task. Ask me one question at a time until you understand what I actually want.`
-- `Help me create a task-specific execution prompt before doing the work.`
-- `I want a clarify -> confirm -> execute -> self-review workflow for this task.`
-
-## Current Status
-
-This repository is publishable and usable now, but it is still evolving through real tasks.
-
-Recent improvements include:
-
-- explicit stage broadcasting
-- lightweight vs full-protocol mode selection
-- research / review workflow guidance
-- task folder naming conventions
-- definition of done vs optional forward testing
-
-## Compatibility
-
-- Codex: compatible
-- Claude Code: structure-compatible, with install helper and project-level skill entry
+- [CHANGELOG.md](CHANGELOG.md)
+- [docs/releases/v0.2.0-release-notes.md](docs/releases/v0.2.0-release-notes.md)
+- [docs/smoke-checklist.md](docs/smoke-checklist.md)
+- [docs/validation-matrix.md](docs/validation-matrix.md)
 
 ## License
 

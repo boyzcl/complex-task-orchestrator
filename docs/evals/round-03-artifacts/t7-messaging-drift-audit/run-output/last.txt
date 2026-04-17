@@ -1,0 +1,3 @@
+审计结果已写入 [deliverable.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/round-03-artifacts/t7-messaging-drift-audit/deliverable.md)。
+
+我按你限定的 5 个来源做了快速口径审计，收敛为 4 条高价值发现，重点落在两类漂移：一是把能力讲成通用复杂任务代理，二是把 Claude 侧讲得像已跨客户端成立。没有修改你点名的源文件，只新增了这份 audit 交付。

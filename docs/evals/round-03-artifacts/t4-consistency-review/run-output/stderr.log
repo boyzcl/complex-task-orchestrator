@@ -1,0 +1,2 @@
+WARNING: proceeding, even though we could not update PATH: Refusing to create helper binaries under temporary dir "/var/folders/lb/58dlt97j5hs41tbwllv5kk180000gn/T/" (codex_home: "/var/folders/lb/58dlt97j5hs41tbwllv5kk180000gn/T/tmp.Zp77VrpgAi/.codex")
+2026-04-17T02:36:35.681576Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at "/var/folders/lb/58dlt97j5hs41tbwllv5kk180000gn/T/tmp.Zp77VrpgAi/.codex/shell_snapshots/019d994c-1d51-70a3-8476-e76a744098bb.tmp-1776393395553506000": Os { code: 2, kind: NotFound, message: "No such file or directory" }
