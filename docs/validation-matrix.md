@@ -1,6 +1,6 @@
 # Validation Matrix
 
-最后更新：2026-04-17
+最后更新：2026-04-29
 
 ## 当前阶段结论
 
@@ -17,6 +17,8 @@
 | 关键文件存在 | `validate-skill-project.sh` | 已验证 |
 | README 关键区块 | `validate-skill-project.sh` | 已验证 |
 | `SKILL.md` 关键区块 | `validate-skill-project.sh` | 已验证 |
+| validation-first reference 文件 | `validate-skill-project.sh` | 已验证 |
+| 测试先行关键流程 | `validate-skill-project.sh` | 已验证 |
 | runtime manifest JSON | `validate-skill-project.sh` | 已验证 |
 | Codex 安装脚本 | 临时 `HOME` 下运行 | 已验证 |
 | Claude Code 安装脚本 | 临时 `HOME` 下运行 | 已验证 |
@@ -33,6 +35,8 @@
 | Round 2 记录脚手架 | 已验证 | `scaffold-round2-client-run.sh` 已纳入校验 |
 | memory governance 文档 | 已验证 | `docs/runtime-governance.md` 已存在 |
 | Codex 客户端运行器 | 已验证 | `run-codex-client-validation.sh` 已纳入校验 |
+| 测试先行升级方案 | 已验证 | `docs/upgrade-plans/test-first-validation-upgrade-plan.md` 已存在 |
+| 测试先行实施留痕 | 已验证 | 验证逻辑、迭代计划和验证结果文档已建立 |
 
 ## 版本收口
 
@@ -69,6 +73,7 @@
 | Claude Code 解除阻塞清单 | 已建立 | 已明确最小环境前提与验收命令 |
 | Round 3 任务板 | 已建立并补样完成 | 当前已完成 `T1` 到 `T9` |
 | Round 3 产品价值判断 | 已建立 | 已收口为 `Codex`-only 受限试用 |
+| 测试先行协议升级 | 结构验证中 | 当前是 `Unreleased` 协议升级，不扩大既有产品价值边界 |
 
 ## Round 1 Gate 状态
 

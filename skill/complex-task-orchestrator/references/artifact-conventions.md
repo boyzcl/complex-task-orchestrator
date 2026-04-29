@@ -14,16 +14,18 @@
 docs/
   task-slug/
     01-requirement-consensus.md
-    02-task-execution-prompt.md
-    03-self-review-and-summary.md
+    02-validation-and-test-plan.md
+    03-execution-plan.md
+    04-self-review-and-summary.md
     [primary-output-if-needed]
 ```
 
 默认文件：
 
 - `01-requirement-consensus.md`
-- `02-task-execution-prompt.md`
-- `03-self-review-and-summary.md`
+- `02-validation-and-test-plan.md`
+- `03-execution-plan.md`
+- `04-self-review-and-summary.md`
 
 ## 任务目录命名
 
@@ -59,20 +61,38 @@ docs/
 - 关键约束
 - 验收标准
 
-### 任务执行指令
+### 测试与验收方案
 
-为当前任务创建一份一次性的 Markdown 指令。
+在执行计划前创建，记录当前任务如何判断完成。
+
+建议包含：
+
+- 验证目标
+- 验证点
+- 验证方法
+- 预期结果
+- 必过项与可选项
+- 证据留存方式
+- 失败后的迭代规则
+
+### 执行计划
+
+为当前任务创建一份一次性的 Markdown 执行计划。
 
 要求：
 
 - 必须针对当前任务
 - 必须足够自包含，不依赖额外解释
 - 默认完整，只有在任务显然更简单时才裁剪
+- 必须基于已确认的测试与验收方案
+- 每个关键执行步骤尽量对应一个验证点
 
 ### 自检与总结
 
 记录：
 
+- 预设验证结果
+- 未通过项的处理过程
 - 1 到 10 分评分
 - 扣分原因
 - 自检后实际做过的修订
@@ -88,4 +108,11 @@ docs/
 
 ## 压缩规则
 
-如果任务足够简单，可以减少文档量。但除非用户明确放弃，否则不要省略任务执行指令文档。
+如果任务足够简单，可以减少文档量。轻量任务可以合并为：
+
+```text
+01-requirement-consensus.md
+02-execution-and-validation-summary.md
+```
+
+但复杂或长链路任务不应省略测试与验收设计。

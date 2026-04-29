@@ -2,7 +2,10 @@
 
 ## Unreleased
 
-- 暂无未发布条目
+- 新增 validation-first 协议升级：复杂或长链路任务先设计测试/验收逻辑，再生成执行计划。
+- 默认复杂任务产物从 3 件套升级为 4 件套：需求共识、验证方案、执行计划、自检总结。
+- 新增 `validation-first-workflow` 与 `validation-plan-template` 参考文档。
+- 更新完成定义、自检清单、阶段播报、README、first-run 和 smoke checklist，使预设验证回验成为主流程的一部分。
 
 ## v0.2.0 - 2026-04-17
 

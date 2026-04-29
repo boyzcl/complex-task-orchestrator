@@ -1,6 +1,6 @@
 # complex-task-orchestrator
 
-A reusable skill that pushes complex tasks through clarify, align, execute, and self-review instead of letting the model charge ahead too early.
+A reusable skill that pushes complex tasks through clarify, align, validate first, plan, execute, verify, iterate, and self-review instead of letting the model charge ahead too early.
 
 [中文说明](./README.md)
 
@@ -23,6 +23,7 @@ It should not currently be described as:
 - complex, ambiguous, multi-stage tasks
 - work where misunderstanding is expensive
 - tasks that benefit from explicit consensus before execution
+- tasks that need validation or acceptance checks before the execution plan
 - research reviews, system design, project planning, open-ended implementation, skill and workflow design
 
 ## Strongest Validated Uses Right Now
@@ -44,7 +45,7 @@ These are not the full theoretical scope of the skill. They are the task types t
 ## 30-Second Example
 
 ```text
-This is a complex task. Use complex-task-orchestrator to clarify the requirement, confirm consensus, create an execution prompt, and then do the work.
+This is a complex task. Use complex-task-orchestrator to clarify the requirement, confirm consensus, define validation checks first, create an execution plan, and then do the work.
 ```
 
 ```text
@@ -57,15 +58,19 @@ On a typical first run, the skill will try to move the task through a more relia
 
 1. clarify the most important ambiguity
 2. restate the requirement and ask for confirmation
-3. generate a task-specific execution document
-4. execute
-5. self-review, revise, and summarize
+3. define task-specific validation or acceptance checks
+4. generate a task-specific execution plan
+5. execute
+6. verify against the preset validation plan
+7. iterate if required checks fail, then self-review and summarize
 
 If the task is already clear enough, it can switch to the `Quick Path`:
 
 - 0 to 1 clarification turns
 - one short consensus confirmation
-- a short execution prompt
+- a minimal acceptance checklist
+- a short execution plan
+- verification against the minimal checklist
 - self-review still required
 
 ## What A Run Usually Produces
@@ -73,8 +78,9 @@ If the task is already clear enough, it can switch to the `Quick Path`:
 If writing artifacts is allowed, the default minimal outputs are:
 
 - `01-requirement-consensus.md`
-- `02-task-execution-prompt.md`
-- `03-self-review-and-summary.md`
+- `02-validation-and-test-plan.md`
+- `03-execution-plan.md`
+- `04-self-review-and-summary.md`
 
 See [docs/first-run-example.md](docs/first-run-example.md) and [artifact conventions](skill/complex-task-orchestrator/references/artifact-conventions.md).
 
@@ -84,9 +90,9 @@ Direct prompting often fails in three ways:
 
 - execution starts before the requirement is actually clear
 - the answer looks polished but solves the wrong problem
-- the task ends without a real revision loop
+- the task ends without preset verification and a real revision loop
 
-This skill is useful because it makes the execution contract explicit before the model commits to a path.
+This skill is useful because it makes the validation contract and execution plan explicit before the model commits to a path.
 
 More detail: [docs/why-this-helps.md](docs/why-this-helps.md)
 
@@ -149,6 +155,7 @@ As of April 17, 2026, this project includes:
 - an installable skill
 - Codex and Claude Code install scripts
 - quick path and full path behavior
+- an unreleased validation-first protocol upgrade
 - a minimal runtime memory host
 - a packaged `v0.2.0` release set
 - 3 public cases and 1 comparison page
@@ -162,6 +169,8 @@ Current validated scope:
 - phase-level validation in `Codex`
 - a `Codex`-only limited-trial position
 - briefs, quick audits, and fixed-source judgment tasks
+
+The current working tree also contains an `Unreleased` validation-first protocol upgrade. It is covered by structural checks, but it does not expand the April 17, 2026 product-value boundary by itself.
 
 It does not claim:
 

@@ -1,6 +1,6 @@
 # complex-task-orchestrator
 
-一个把复杂任务从“直接开工”拉回到“先澄清、再对齐、再执行”的可复用 skill。
+一个把复杂任务从“直接开工”拉回到“先澄清、先验证、再计划、再执行”的可复用 skill。
 
 [English README](./README_EN.md)
 
@@ -22,7 +22,7 @@
 
 - 复杂、开放、多阶段、误解成本高的任务
 - 需要先问清楚再执行的任务
-- 需要沉淀需求共识、执行指令和自检总结的任务
+- 需要先定义测试/验收逻辑，再沉淀执行计划和自检总结的任务
 - 调研综述、系统设计、项目规划、开放式实现、skill / workflow 设计
 
 ## 当前已验证最强场景
@@ -44,7 +44,7 @@
 ## 30 秒触发示例
 
 ```text
-这是一个复杂任务。请用 complex-task-orchestrator 先澄清需求，做一次共识确认，再生成执行指令后开始做。
+这是一个复杂任务。请用 complex-task-orchestrator 先澄清需求，做一次共识确认，再先给测试/验收思路，生成执行计划后开始做。
 ```
 
 ```text
@@ -57,15 +57,19 @@ Use complex-task-orchestrator to clarify this ambiguous task before execution.
 
 1. 如果任务仍有关键歧义，先问清楚最关键的问题
 2. 在执行前复述理解并做一次共识确认
-3. 为当前任务生成一份一次性执行指令
-4. 再进入正式执行
-5. 完成后自检、修订、总结
+3. 先为当前任务设计测试/验收逻辑
+4. 再生成一次性执行计划
+5. 再进入正式执行
+6. 完成后按预设验证方案回验
+7. 如未通过则迭代修订，最后自检、总结
 
 如果任务已经足够清楚，它会压缩到 `Quick Path`：
 
 - 0 到 1 轮澄清
 - 一次简短共识确认
-- 一份短版执行指令
+- 一份最小验收检查
+- 一份短版执行计划
+- 按最小验收检查回验
 - 保留自检和最终总结
 
 ## 一次运行通常会产出什么
@@ -73,8 +77,9 @@ Use complex-task-orchestrator to clarify this ambiguous task before execution.
 如果允许落盘，默认最小产物是：
 
 - `01-requirement-consensus.md`
-- `02-task-execution-prompt.md`
-- `03-self-review-and-summary.md`
+- `02-validation-and-test-plan.md`
+- `03-execution-plan.md`
+- `04-self-review-and-summary.md`
 
 具体约定见 [docs/first-run-example.md](docs/first-run-example.md) 和 [skill/complex-task-orchestrator/references/artifact-conventions.md](skill/complex-task-orchestrator/references/artifact-conventions.md)。
 
@@ -90,8 +95,9 @@ Use complex-task-orchestrator to clarify this ambiguous task before execution.
 
 - 先逼出真实目标
 - 先对齐边界和验收标准
-- 把执行协议显性化
-- 在收工前强制做一轮质量检查
+- 在执行前定义测试/验收逻辑
+- 把执行计划显性化
+- 在收工前按预设验证回验并自检
 
 更多解释见 [docs/why-this-helps.md](docs/why-this-helps.md)。
 
@@ -154,6 +160,7 @@ bash /path/to/complex-task-orchestrator/scripts/install-claude-code-skill.sh
 - 可安装的 skill 本体
 - Codex 与 Claude Code 的安装脚本
 - 快速路径与完整路径
+- 测试/验收先行的待发布协议升级
 - 最小 runtime memory 宿主
 - `v0.2.0` release package
 - 3 个公开案例与 1 个对照案例
@@ -167,6 +174,8 @@ bash /path/to/complex-task-orchestrator/scripts/install-claude-code-skill.sh
 - `Codex` 内的阶段性验证
 - `Codex`-only 受限试用
 - brief / quick audit / 固定来源复杂判断这三类任务
+
+当前工作树的 `Unreleased` 变更还加入了测试/验收先行流程。该升级已经纳入结构校验，但不改变 2026 年 4 月 17 日形成的产品价值边界。
 
 仍未宣称的内容：
 

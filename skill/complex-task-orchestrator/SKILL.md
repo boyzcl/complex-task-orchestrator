@@ -1,7 +1,7 @@
 ---
 name: complex-task-orchestrator
 description: >
-  Use this skill for complex, open-ended, multi-step, or underspecified tasks that should not be executed immediately. Trigger when the user asks the agent to clarify requirements first, asks for one-question-at-a-time alignment, needs explicit requirement consensus before execution, wants a task-specific Markdown execution prompt or document, or wants a full clarification, execution, and self-review workflow. 默认用于复杂、开放式、需求不完整、多阶段、误解成本高的任务：先逐轮单问澄清需求，达到高置信理解后复述并确认，再为当前任务生成一次性 Markdown 执行指令文档，随后执行、自检和总结。 Do not use for simple, well-scoped requests that can be executed directly.
+  Use this skill for complex, open-ended, multi-step, or underspecified tasks that should not be executed immediately. Trigger when the user asks the agent to clarify requirements first, asks for one-question-at-a-time alignment, needs explicit requirement consensus before execution, wants validation/test thinking before the execution plan, wants task-specific Markdown planning artifacts, or wants a full clarification, validation-first execution, verification, iteration, and self-review workflow. 默认用于复杂、开放式、需求不完整、多阶段、误解成本高的任务：先逐轮单问澄清需求，达到高置信理解后复述并确认，再先设计测试/验收逻辑，然后生成执行计划，随后执行、按预设验证回验、失败迭代、自检和总结。 Do not use for simple, well-scoped requests that can be executed directly.
 ---
 
 # Complex Task Orchestrator
@@ -9,8 +9,9 @@ description: >
 ## Mission
 
 - 先建立清晰共识，再执行复杂任务。
-- 为当前任务生成一次性执行指令文档，而不是复用空泛的通用 prompt。
-- 把任务推进到可交付结果、自检和总结，而不是停在想法或方案层。
+- 先设计测试/验收逻辑，再生成执行计划。
+- 为当前任务生成一次性验证方案和执行计划，而不是复用空泛的通用 prompt。
+- 把任务推进到可交付结果、预设验证回验、失败迭代、自检和总结，而不是停在想法或方案层。
 
 ## Trigger Boundaries
 
@@ -33,10 +34,12 @@ description: >
 - 默认阶段名称：
   - 需求澄清
   - 共识确认
-  - 执行指令生成
+  - 测试与验收设计
+  - 执行计划生成
   - 正式执行
-  - 自检修订
-  - 任务总结
+  - 预设验证回验
+  - 失败迭代
+  - 自检总结
   - 扩展验证（仅在需要 forward test 时进入）
 - 如果任务在主流程内已经完成，要明确说“主任务已完成”；不要把后续可选验证说成主流程尚未完成。
 - 按 [references/stage-broadcast.md](references/stage-broadcast.md) 输出阶段提示。
@@ -54,7 +57,9 @@ description: >
 
 - 可以压缩追问为 0 到 1 轮
 - 仍要做一次简短共识确认
-- 仍建议生成执行指令，但可以压缩成短版
+- 仍要列出最小验收检查
+- 仍建议生成执行计划，但可以把验证方案和执行计划压缩成短版
+- 完成后仍要按最小验收检查回验
 - 仍要保留自检与最终总结
 
 如果快速路径中途出现会改变方案方向或验收标准的新歧义，立即回到完整路径。
@@ -88,27 +93,43 @@ description: >
 - 至少覆盖问题、目标、约束、交付物、质量标准、执行边界。
 - 明确请求用户确认；未确认前不要进入正式执行。
 
-### 5. Create task-specific execution artifacts
+### 5. Design validation before planning
+
+- 在正式执行计划前，先为当前任务设计测试/验收逻辑。
+- 至少明确验证点、验证方法、预期结果、必过项、证据留存方式和失败迭代规则。
+- 每个核心交付物至少要有一个对应验证点。
+- 如果任务不是代码任务，也要使用人工验收表、证据矩阵、口径一致性检查或读者路径检查等方式验证。
+- 需要完整规则时，读取 [references/validation-first-workflow.md](references/validation-first-workflow.md)。
+- 需要模板时，读取 [references/validation-plan-template.md](references/validation-plan-template.md)。
+
+### 6. Create task-specific planning artifacts
 
 - 在正式执行前，先为当前任务生成 Markdown 文档。
-- 用户侧项目文档默认跟随当前对话语言；如果当前协作是中文，就优先用中文写需求共识、执行指令和自检总结。
+- 用户侧项目文档默认跟随当前对话语言；如果当前协作是中文，就优先用中文写需求共识、验证方案、执行计划和自检总结。
 - 除非用户明确反对，否则默认创建最小文档骨架：
   - 需求共识文档
-  - 一次性任务执行指令文档
+  - 测试与验收方案文档
+  - 一次性执行计划文档
   - 自检与总结文档
 - 按 [references/artifact-conventions.md](references/artifact-conventions.md) 组织文档。
-- 按 [references/execution-prompt-template.md](references/execution-prompt-template.md) 生成任务执行指令，默认完整，再按复杂度裁剪。
+- 按 [references/execution-prompt-template.md](references/execution-prompt-template.md) 生成任务执行计划，默认完整，再按复杂度裁剪。
 - 如果任务本质上是研究、调查、证据整合、文献综述或框架比较，读取 [references/research-review-workflow.md](references/research-review-workflow.md)。
 
-### 6. Execute against the agreed prompt
+### 7. Execute against the agreed plan
 
-- 把执行指令文档当作当前任务的操作协议。
+- 把执行计划文档当作当前任务的操作协议。
 - 如果执行中出现新的歧义：
   - 影响主路径、方案方向或验收标准时，暂停并回到澄清阶段。
   - 不影响主路径时，做最小合理假设继续推进，并在结果中说明假设。
 - 把关键决策和重要偏差更新回项目文档。
 
-### 7. Self-review and revise
+### 8. Verify, iterate, then self-review
+
+- 执行完成后，先按测试与验收方案逐项回验。
+- 记录通过、失败、跳过和阻塞原因，并保留关键证据。
+- 任何必过验证项失败时，不要直接进入最终总结；先定位原因、修复或补充，再重新运行相关验证。
+- 如果无法通过，明确说明外部阻塞、影响范围和剩余风险。
+- 自检不能替代预设验证；自评分必须基于验证结果。
 
 - 完成后按 [references/self-review-checklist.md](references/self-review-checklist.md) 自检。
 - 先给工作打 1 到 10 分，并说明扣分原因。
@@ -140,7 +161,7 @@ description: >
   - 继续追问当前最关键的模糊点
   - 不要一次问多个问题
 - 不适合写文件：
-  - 保留口头版共识确认和压缩版执行指令
+  - 保留口头版共识确认、压缩版验收检查和压缩版执行计划
   - 不要因为无法落盘就放弃协议核心
 - 中途需求变更：
   - 若变更影响主路径、交付物或验收标准，回到共识确认
@@ -152,7 +173,8 @@ description: >
 
 - 结果解决的是用户真正的问题，而不是一个浅层代理问题。
 - 执行路径明显减少了返工或方向跑偏。
-- 共识、执行指令和最终交付之间保持一致。
+- 共识、验证方案、执行计划和最终交付之间保持一致。
+- 最终交付已按预设验证方案回验，必过项已经通过或阻塞已说明。
 - 留下了足够的产物，方便下次复用或交接。
 
 需要更明确的成功标准时，读取 [references/success-criteria.md](references/success-criteria.md)。
@@ -169,6 +191,7 @@ description: >
 - 让执行文档服务当前任务，而不是写成抽象宣言。
 - 让用户要读的项目文档优先对当前用户可读，而不是优先迁就开源展示。
 - 让文档足够自包含，使另一个高能力模型也能直接接手执行。
+- 让验证方案先于执行计划出现，避免执行后才临时定义成功标准。
 - 当类似任务会反复出现时，优先复用脚手架或模板，降低留痕成本。
 - 让最终总结始终回答四件事：
   - 目前的问题是什么
@@ -181,7 +204,9 @@ description: >
 - 需要文档产物规则时，读取 [references/artifact-conventions.md](references/artifact-conventions.md)。
 - 需要阶段播报时，读取 [references/stage-broadcast.md](references/stage-broadcast.md)。
 - 需要判断轻量模式或完整模式时，读取 [references/mode-selection.md](references/mode-selection.md)。
-- 需要生成一次性任务执行指令时，读取 [references/execution-prompt-template.md](references/execution-prompt-template.md)。
+- 需要先设计测试/验收逻辑时，读取 [references/validation-first-workflow.md](references/validation-first-workflow.md)。
+- 需要生成验证方案时，读取 [references/validation-plan-template.md](references/validation-plan-template.md)。
+- 需要生成一次性任务执行计划时，读取 [references/execution-prompt-template.md](references/execution-prompt-template.md)。
 - 需要处理研究、调研、综述、证据整合任务时，读取 [references/research-review-workflow.md](references/research-review-workflow.md)。
 - 需要执行后自检时，读取 [references/self-review-checklist.md](references/self-review-checklist.md)。
 - 需要判断任务是否真正完成、以及 forward test 是否属于主流程时，读取 [references/definition-of-done.md](references/definition-of-done.md)。

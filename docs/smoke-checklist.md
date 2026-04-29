@@ -14,6 +14,7 @@ bash /Users/boyzcl/Documents/Complex_Task/scripts/validate-skill-project.sh
 
 - 关键文件存在
 - README 与 `SKILL.md` 包含核心区块
+- validation-first reference 文件存在
 - runtime manifest JSON 有效
 - Codex 与 Claude Code 安装脚本能在临时 `HOME` 下创建正确符号链接
 
@@ -33,9 +34,23 @@ bash /Users/boyzcl/Documents/Complex_Task/scripts/validate-skill-project.sh
 确认 `SKILL.md` 中已存在：
 
 - Quick Path
+- Validation-first workflow
 - Runtime Reuse Rules
 - Failure Handling
 - Success Signals
+
+### 2.1 测试先行检查
+
+确认：
+
+- `SKILL.md` 包含 `测试与验收设计`
+- `SKILL.md` 包含 `预设验证回验`
+- `artifact-conventions.md` 包含 4 件套：
+  - `01-requirement-consensus.md`
+  - `02-validation-and-test-plan.md`
+  - `03-execution-plan.md`
+  - `04-self-review-and-summary.md`
+- `self-review-checklist.md` 明确自检不能替代预设验证
 
 ### 3. 案例页检查
 
