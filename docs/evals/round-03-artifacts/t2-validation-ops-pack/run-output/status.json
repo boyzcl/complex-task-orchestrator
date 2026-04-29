@@ -1,0 +1,8 @@
+{
+  "status": "timeout",
+  "exit_code": 0,
+  "timeout_seconds": 180,
+  "events_present": true,
+  "last_message_present": false,
+  "stderr_present": true
+}

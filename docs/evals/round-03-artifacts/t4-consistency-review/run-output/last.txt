@@ -1,0 +1,5 @@
+已完成，结果写入 [deliverable.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/round-03-artifacts/t4-consistency-review/deliverable.md)。
+
+结论很收敛：核心决策文档基本一致，主要有 3 处高价值口径漂移，分别在 `round-02-client-validation-plan.md`、`session-handoff-2026-04-17.md`、`README.md`。它们共同的问题是仍把 `Claude Code` 补跑叙述成当前主线或完成条件，容易覆盖“`Codex` 通过即可成立”的现口径。
+
+按要求我没有直接修改现有评估文档，只新增了这份 review note。

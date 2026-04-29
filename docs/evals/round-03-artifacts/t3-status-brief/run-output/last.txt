@@ -1,0 +1,4 @@
+已写入 [deliverable.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/round-03-artifacts/t3-status-brief/deliverable.md)。
+
+内容控制在要求内：
+中文版 5 行，英文版 5 行。基于当前仓库里的 `README`、`CHANGELOG`、`runtime-governance`、`evals` 与 Round 3 计划/任务板提炼。

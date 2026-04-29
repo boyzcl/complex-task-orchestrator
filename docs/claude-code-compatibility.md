@@ -1,69 +1,97 @@
-# Claude Code 兼容说明
+# Claude Code 边界说明
 
 ## 结论
 
-`complex-task-orchestrator` 在结构层面与 Claude Code 的自定义 Skill 机制兼容。
+截至 2026 年 4 月 17 日，Claude Code **不在当前成立范围内**。
 
-兼容原因：
+当前能确认的是：
 
-- Skill 目录名与 `name` 一致：`complex-task-orchestrator`
-- 主入口文件为标准的 `SKILL.md`
-- 使用的是 `name + description` 的 YAML frontmatter
-- 其余说明文件放在子目录中，不影响 Claude Code 识别
+- 仓库结构与 Claude Code 的自定义 skill 发现机制兼容
+- 项目级入口和安装脚本都已存在
 
-`agents/openai.yaml` 是给 Codex/UI 用的附加元数据，Claude Code 即使不使用它，也不会影响 `SKILL.md` 这套 Skill 主体工作。
+当前不能确认的是：
 
-## 当前项目里已经做好的两层兼容
+- Claude Code 里已经具备可复现的真实任务正样本
+- Claude Code 已进入当前 `Codex`-only 受限试用范围
 
-### 1. 项目级兼容
+## 事实分层
 
-已在项目内创建：
+截至 2026 年 4 月 17 日，请把兼容性理解成以下三层：
+
+### 1. 结构兼容：已具备
+
+当前仓库满足 Claude Code 识别 skill 的基础结构：
+
+- skill 目录名与 `name` 一致：`complex-task-orchestrator`
+- skill 主入口为 `SKILL.md`
+- frontmatter 使用 `name + description`
+- 其他参考文件都在子目录中，不影响主入口识别
+
+### 2. 项目级入口：已具备
+
+仓库内包含：
 
 - `.claude/skills/complex-task-orchestrator`
 
-这意味着如果你用 Claude Code 打开这个项目，项目级 Skill 发现机制理论上就能直接看到它。
+这意味着当 Claude Code 打开本项目时，项目级发现机制有机会直接看到该 skill，但这仍然不构成行为验证通过。
 
-### 2. 个人级兼容
+### 3. 用户级安装：需要用户执行脚本
 
-已在你的用户目录创建：
-
-- `~/.claude/skills/complex-task-orchestrator`
-
-这是一个指向本项目 Skill 目录的符号链接。也就是说，你在其他 Claude Code 工作区中，通常也能直接复用这一份 Skill。
-
-## 安装脚本
-
-项目里提供了一个安装脚本：
+仓库提供：
 
 - [install-claude-code-skill.sh](/Users/boyzcl/Documents/Complex_Task/scripts/install-claude-code-skill.sh)
 
-运行方式：
-
-```bash
-bash /Users/boyzcl/Documents/Complex_Task/scripts/install-claude-code-skill.sh
-```
-
-它会把当前项目里的 Skill 以符号链接方式安装到：
+运行后会创建：
 
 ```text
 ~/.claude/skills/complex-task-orchestrator
 ```
 
-## 使用建议
+重要边界：
 
-如果你想在 Claude Code 里验证它，建议：
+- 这不是仓库天然自带的状态
+- 只有在用户实际运行安装脚本后，这个用户级符号链接才会存在
+- 仅有目录结构和符号链接还不等于“本机已经具备可运行的 Claude Code 客户端”
 
-1. 在 Claude Code 中打开本项目，或任意一个你想测试的项目
-2. 直接明确提到 `complex-task-orchestrator`，或者给出一个明显复杂、开放、需要先澄清再执行的任务
-3. 观察它是否按预期进入：
-   - 需求澄清
-   - 共识确认
-   - 执行指令生成
-   - 正式执行
-   - 自检修订
+## 当前尚未宣称的内容
 
-## 还需要注意的点
+当前文档不宣称以下内容已经完成验证：
 
-- Claude Code 和 Codex 对 Skill 的触发体验、UI 展示、上下文注入细节不一定完全相同，所以“兼容”不等于“体验完全一致”
-- 结构兼容已经具备，真正还需要验证的是 Claude Code 中的实际触发率和阶段表现
-- 如果后续发现 Claude Code 对 description 长度、触发语气、目录发现规则有更明确偏好，再做一轮定向微调即可
+- 所有 Claude Code 版本上的触发体验一致
+- Claude Code 中的自动触发率已经充分验证
+- 阶段播报、quick path、runtime reuse 在 Claude Code 中都已完成充分的真实任务验证
+
+## 安装方式
+
+```bash
+bash /Users/boyzcl/Documents/Complex_Task/scripts/install-claude-code-skill.sh
+```
+
+## 建议验证方式
+
+如果你要在 Claude Code 里验证，建议最少做两类测试：
+
+1. 轻量模式任务
+2. 完整模式任务
+
+重点观察：
+
+- 是否进入 skill
+- 是否能做出明确的阶段切换
+- 是否会在需要时走 quick path
+- 是否能按预期生成共识确认和执行指令
+
+对应记录面已经准备在：
+
+- [docs/evals/round-02-client-validation-plan.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/round-02-client-validation-plan.md)
+- [docs/evals/client-trigger-log.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/client-trigger-log.md)
+
+## 兼容性判断
+
+当前最准确的判断是：
+
+- `结构兼容：是`
+- `项目级入口：是`
+- `安装脚本：是`
+- `当前成立范围：否`
+- `完整行为验证：仍未完成`

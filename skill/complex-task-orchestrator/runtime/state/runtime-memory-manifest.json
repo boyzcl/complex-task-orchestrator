@@ -1,0 +1,80 @@
+{
+  "version": "0.2.0",
+  "updated_at": "2026-04-17",
+  "governance": {
+    "statuses": [
+      "active",
+      "watch",
+      "stale"
+    ],
+    "default_read_statuses": [
+      "active"
+    ],
+    "conditional_read_statuses": [
+      "watch"
+    ],
+    "default_skip_statuses": [
+      "stale"
+    ],
+    "review_trigger": "Reassess after client validation or when reuse quality drops."
+  },
+  "captures": [
+    {
+      "id": "2026-04-08-skill-bootstrap",
+      "path": "captures/2026-04-08-skill-bootstrap.md",
+      "task_type": "skill-bootstrap"
+    },
+    {
+      "id": "2026-04-08-research-review",
+      "path": "captures/2026-04-08-research-review.md",
+      "task_type": "research-review"
+    },
+    {
+      "id": "2026-04-17-release-gate-design",
+      "path": "captures/2026-04-17-release-gate-design.md",
+      "task_type": "planning-design"
+    },
+    {
+      "id": "2026-04-17-i2-runtime-scaffold",
+      "path": "captures/2026-04-17-i2-runtime-scaffold.md",
+      "task_type": "implementation-remediation"
+    },
+    {
+      "id": "2026-04-17-r2-runtime-memory-research",
+      "path": "captures/2026-04-17-r2-runtime-memory-research.md",
+      "task_type": "research-review"
+    }
+  ],
+  "promoted_patterns": [
+    {
+      "id": "clarify-before-execute",
+      "path": "promoted/patterns/clarify-before-execute.md",
+      "status": "active",
+      "evidence_count": 2,
+      "last_confirmed_at": "2026-04-17"
+    }
+  ],
+  "promoted_failure_modes": [
+    {
+      "id": "polished-answer-wrong-problem",
+      "path": "promoted/failure-modes/polished-answer-wrong-problem.md",
+      "status": "active",
+      "evidence_count": 2,
+      "last_confirmed_at": "2026-04-17"
+    },
+    {
+      "id": "memory-friction-suppresses-capture",
+      "path": "promoted/failure-modes/memory-friction-suppresses-capture.md",
+      "status": "active",
+      "evidence_count": 1,
+      "last_confirmed_at": "2026-04-17"
+    },
+    {
+      "id": "over-extraction-causes-memory-drift",
+      "path": "promoted/failure-modes/over-extraction-causes-memory-drift.md",
+      "status": "watch",
+      "evidence_count": 1,
+      "last_confirmed_at": "2026-04-17"
+    }
+  ]
+}

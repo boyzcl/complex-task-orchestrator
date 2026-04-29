@@ -1,4 +1,4 @@
 interface:
   display_name: "Complex Task Orchestrator"
-  short_description: "Clarify, align, execute, and self-review complex tasks"
-  default_prompt: "Use $complex-task-orchestrator to clarify this complex task, create an execution prompt document, then carry it through execution and self-review."
+  short_description: "Clarify, validate first, plan, execute, verify, and self-review complex tasks"
+  default_prompt: "Use $complex-task-orchestrator to clarify this complex task, define validation checks first, create an execution plan, then execute, verify, iterate, and self-review."

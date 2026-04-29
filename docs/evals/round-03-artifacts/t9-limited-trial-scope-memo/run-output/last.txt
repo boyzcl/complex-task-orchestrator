@@ -1,0 +1,10 @@
+已完成，memo 写入 [deliverable.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/round-03-artifacts/t9-limited-trial-scope-memo/deliverable.md)。
+
+我只使用了题目限定的 6 个来源，内容按要求包含：
+1. 一句当前判断
+2. 可主动试用的任务类型
+3. 暂不应主打的任务类型
+4. 下一批样本如何补
+5. 当前最容易说大的风险
+
+已做自检：文件总长度约 `780` 字符，落在要求区间内。

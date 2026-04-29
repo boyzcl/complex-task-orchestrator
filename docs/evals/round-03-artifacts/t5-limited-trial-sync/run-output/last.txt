@@ -1,0 +1,3 @@
+已写入 [deliverable.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/round-03-artifacts/t5-limited-trial-sync/deliverable.md)。
+
+内容控制为 4 行，按当前仓库口径收口到 `Codex`-only 受限试用，只保留了优先任务类型和这轮续跑样本配比。

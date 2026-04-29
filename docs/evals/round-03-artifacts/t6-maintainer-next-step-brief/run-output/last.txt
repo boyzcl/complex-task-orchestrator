@@ -1,0 +1,3 @@
+已写入 [deliverable.md](/Users/boyzcl/Documents/Complex_Task/docs/evals/round-03-artifacts/t6-maintainer-next-step-brief/deliverable.md)。
+
+内容控制为 6 行，聚焦三件事：这轮不要再做什么、优先补跑什么、以及跑完后必须立即回写哪些文档。
