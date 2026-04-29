@@ -175,7 +175,7 @@ bash /path/to/complex-task-orchestrator/scripts/install-claude-code-skill.sh
 - `Codex`-only 受限试用
 - brief / quick audit / 固定来源复杂判断这三类任务
 
-当前工作树的 `Unreleased` 变更还加入了测试/验收先行流程。该升级已经纳入结构校验，但不改变 2026 年 4 月 17 日形成的产品价值边界。
+当前 `Unreleased` 变更还加入了测试/验收先行流程。该升级已经纳入结构校验，但不改变 2026 年 4 月 17 日形成的产品价值边界。
 
 仍未宣称的内容：
 

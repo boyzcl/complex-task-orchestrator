@@ -170,7 +170,7 @@ Current validated scope:
 - a `Codex`-only limited-trial position
 - briefs, quick audits, and fixed-source judgment tasks
 
-The current working tree also contains an `Unreleased` validation-first protocol upgrade. It is covered by structural checks, but it does not expand the April 17, 2026 product-value boundary by itself.
+The current `Unreleased` changes also include a validation-first protocol upgrade. It is covered by structural checks, but it does not expand the April 17, 2026 product-value boundary by itself.
 
 It does not claim:
 
